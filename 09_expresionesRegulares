@@ -1,0 +1,33 @@
+#!/bin/bash
+# Programa para ejemplificar cómo pacturar la información del usuario y validarla utilizando expresiones regulares.
+# By: Rafael Baculima - sigladon.rc@gmail.com
+
+identificationRegex='^[0-9]{10}$'
+countryRegex='^EC|COL|US$'
+birthdayRegex='^[0-9]{4}/[0-9]{2}/[0-9]{2}$' 
+
+echo "Exprensions regulares"
+#read -p "Ingresar un número de identificación: " identification 
+#read -p "Ingresar las iniciales de un país [EC|COL|US]: " country 
+read -p "Ingresar la fecha de nacimiento [yyyy/MM/dd]: " birthday 
+
+# Validación de la identificación 
+if [[ $identification =~ $identificationRegex ]]; then
+    echo "$identification es una identifación válida."
+else
+    echo "$identification no es una identicación válida."
+fi
+
+# Validación del País 
+if [[ $country =~ $countryRegex ]]; then
+    echo "$country es un país válido."
+else
+    echo "$country es un país no válido."
+fi
+
+# Validación de la fecha de nacimiento
+if  [[ $birthday =~ $birthdayRegex ]] && date -d $birthday >/dev/null 2>&1; then # 2>&1 
+    echo "$birthday es una fecha válida."
+else
+    echo "$birthday no es una fecha válida."
+fi
